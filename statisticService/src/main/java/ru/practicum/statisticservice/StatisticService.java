@@ -6,7 +6,8 @@ import org.springframework.stereotype.Service;
 import ru.practicum.statisticservice.model.Hit;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -22,7 +23,13 @@ public class StatisticService {
 
     public List<Hit> getStatistic(LocalDateTime start, LocalDateTime end, String[] uris, Boolean unique) {
         log.info("{}; /getStatistic; start={}, end={}, uris={}, unique={}", this.getClass(), start, end, uris, unique);
-        return statisticRepository.findAll();
+        List<Hit> hits = statisticRepository.find(start, end, uris);
+        if (unique) {
+            Set<Hit> setHits = new TreeSet<>(Comparator.comparing(Hit::getIp));
+            setHits.addAll(hits);
+            return new ArrayList<>(setHits);
+        }
+        return hits;
     }
 
 }
