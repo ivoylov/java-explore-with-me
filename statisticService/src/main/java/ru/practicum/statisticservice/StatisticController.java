@@ -22,6 +22,11 @@ public class StatisticController {
 
     private StatisticService statisticService;
 
+    @GetMapping("/ping")
+    public String ping() {
+        return "statistic server is work";
+    }
+
     @PostMapping("/hit")
     public Hit putHit(@Validated(Create.class) @RequestBody HitDtoIn hitDtoIn) {
         log.info("{}; /hit; {}", this.getClass(), hitDtoIn);

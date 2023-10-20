@@ -16,10 +16,12 @@ public class StatisticService {
     StatisticRepository statisticRepository;
 
     public Hit put(Hit hit) {
+        log.info("{}; /put; {}", this.getClass(), hit);
         return statisticRepository.save(hit);
     }
 
     public List<Hit> getStatistic(LocalDateTime start, LocalDateTime end, String[] uris, Boolean unique) {
+        log.info("{}; /getStatistic; start={}, end={}, uris={}, unique={}", this.getClass(), start, end, uris, unique);
         return statisticRepository.findAll();
     }
 
