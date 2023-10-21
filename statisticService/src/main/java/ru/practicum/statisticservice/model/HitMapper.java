@@ -2,6 +2,7 @@ package ru.practicum.statisticservice.model;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j

@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import ru.practicum.statisticservice.Create;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -19,6 +21,6 @@ public class HitDtoIn {
     private String uri;
     @NotBlank(groups = Create.class, message = "ip не может быть пустым")
     private String ip;
-    @NotBlank(groups = Create.class, message = "timestamp не может быть пустым")
-    private String timestamp;
+    @NotNull(groups = Create.class, message = "timestamp не может быть пустым")
+    private LocalDateTime timestamp;
 }
