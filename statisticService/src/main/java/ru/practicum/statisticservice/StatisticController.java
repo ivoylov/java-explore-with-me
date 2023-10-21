@@ -9,8 +9,6 @@ import ru.practicum.statisticservice.model.HitDtoIn;
 import ru.practicum.statisticservice.model.HitMapper;
 import ru.practicum.statisticservice.model.StatDtoOut;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -24,6 +22,7 @@ public class StatisticController {
 
     @GetMapping("/ping")
     public String ping() {
+        log.info("{}; /ping", this.getClass());
         return "statistic server is work";
     }
 
