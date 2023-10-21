@@ -10,6 +10,9 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 import ru.practicum.mainservice.model.Hit;
 import ru.practicum.mainservice.model.HitDtoIn;
+import ru.practicum.mainservice.model.StatDtoOut;
+
+import java.util.Arrays;
 
 @RestController
 @AllArgsConstructor
@@ -41,15 +44,19 @@ public class MainController {
     }
 
     @GetMapping("/stats")
-    public void getHits(@RequestParam("start") String stringStart,
+    public StatDtoOut getHits(@RequestParam("start") String stringStart,
                               @RequestParam("end") String stringEnd,
                               @RequestParam String[] uris,
                               @RequestParam Boolean unique) {
-        log.info("{}; /stats; stringStart={}, stringEnd={}, unique={}", this.getClass(), stringStart, stringEnd, unique);
-        WebClient webClient = WebClient.builder()
-                .baseUrl("http://localhost:9090/stats")
-                .build();
-        webClient.post();
+        log.info("{}; /stats; stringStart={}, stringEnd={}, uris={}, unique={}",
+                this.getClass(), stringStart, stringEnd, uris, unique);
+        WebClient webClient = WebClient.create();
+        Mono<StatDtoOut> statisticAnswer = webClient.get()
+                .uri(String.format( "http://localhost:9090/stats?start=%s&end=%s&uris=%s&unique=%s",
+                        stringStart, stringEnd, Arrays.toString(uris), unique.toString()))
+                .retrieve()
+                .bodyToMono(StatDtoOut.class);
+        return statisticAnswer.blockOptional().get();
     }
 
 }
