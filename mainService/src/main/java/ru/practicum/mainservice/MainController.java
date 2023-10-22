@@ -2,9 +2,10 @@ package ru.practicum.mainservice;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -22,6 +23,7 @@ public class MainController {
     @GetMapping("/ping")
     public String ping() {
         log.info("{}; /ping", this.getClass());
+        log.info("new construct of main controller main service");
         return "main server is working";
     }
 

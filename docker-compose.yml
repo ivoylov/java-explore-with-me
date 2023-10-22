@@ -20,7 +20,7 @@ services:
 
   ewm-service:
     build: mainService
-    container_name: main
+    container_name: ewm
     depends_on:
       - ewm-db
     ports:
