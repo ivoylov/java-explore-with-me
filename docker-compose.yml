@@ -20,9 +20,9 @@ services:
 
   ewm-service:
     build: mainService
-    container_name: ewm
+    container_name: main
     depends_on:
-      - stats-db
+      - ewm-db
     ports:
       - "8080:8080"
 

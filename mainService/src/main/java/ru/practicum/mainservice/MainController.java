@@ -22,12 +22,7 @@ public class MainController {
     @GetMapping("/ping")
     public String ping() {
         log.info("{}; /ping", this.getClass());
-        WebClient webClient = WebClient.create();
-        Mono<String> statisticServerAnswer = webClient.get()
-                .uri("http://localhost:9090/ping")
-                .retrieve()
-                .bodyToMono(String.class);
-        return "main server is working\n" + statisticServerAnswer.blockOptional().get();
+        return "main server is working";
     }
 
     @PostMapping("/hit")
