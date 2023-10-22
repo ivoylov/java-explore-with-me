@@ -23,7 +23,6 @@ public class StatisticController {
     @GetMapping("/ping")
     public String ping() {
         log.info("{}; /ping", this.getClass());
-        log.info("new construct of main controller statistic service");
         return "statistic server is work";
     }
 
