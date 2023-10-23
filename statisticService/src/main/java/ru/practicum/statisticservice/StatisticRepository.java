@@ -16,4 +16,5 @@ public interface StatisticRepository extends JpaRepository<Hit, Long> {
             "and (hit_uri in :uris)",
             nativeQuery = true)
     List<Hit> find(LocalDateTime start, LocalDateTime end, String[] uris);
+
 }

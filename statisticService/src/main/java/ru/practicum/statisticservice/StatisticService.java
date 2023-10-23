@@ -23,9 +23,11 @@ public class StatisticService {
     public List<Hit> getStatistic(LocalDateTime start, LocalDateTime end, String[] uris, Boolean unique) {
         log.info("{}; /getStatistic; start={}, end={}, uris={}, unique={}", this.getClass(), start, end, uris, unique);
         List<Hit> hits = statisticRepository.find(start, end, uris);
+        log.info("{}; got hits; {}", this.getClass(), hits);
         if (unique) {
             Set<Hit> setHits = new TreeSet<>(Comparator.comparing(Hit::getIp));
             setHits.addAll(hits);
+            log.info("{}; hits after duplicate delete; {}", this.getClass(), setHits);
             return new ArrayList<>(setHits);
         }
         return hits;

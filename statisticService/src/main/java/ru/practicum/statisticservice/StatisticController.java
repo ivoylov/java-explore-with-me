@@ -28,9 +28,12 @@ public class StatisticController {
 
     @PostMapping("/hit")
     public Hit putHit(@Validated(Create.class) @RequestBody HitDtoIn hitDtoIn) {
-        log.info("{}; /hit; {}", this.getClass(), hitDtoIn);
+        log.info("{}; /hitDtoIn; {}", this.getClass(), hitDtoIn);
         Hit hit = HitMapper.toHit(hitDtoIn);
-        return statisticService.put(hit);
+        log.info("{}; transformed to Hit; {}", this.getClass(), hit);
+        Hit savedHit = statisticService.put(hit);
+        log.info("{}; saved hit; {}", this.getClass(), savedHit);
+        return savedHit;
     }
 
     @GetMapping("/stats")
@@ -38,11 +41,15 @@ public class StatisticController {
                               @RequestParam("end") String stringEnd,
                               @RequestParam String[] uris,
                               @RequestParam Boolean unique) {
-        log.info("{}; /stats; stringStart={}, stringEnd={}, unique={}", this.getClass(), stringStart, stringEnd, unique);
+        log.info("{}; /stats; stringStart={}, stringEnd={}, uris={}, unique={}",
+                this.getClass(), stringStart, stringEnd, uris, unique);
         String datePattern = "yyyy-MM-dd'T'HH:mm:ss";
         LocalDateTime start = LocalDateTime.parse(stringStart, DateTimeFormatter.ofPattern(datePattern));
         LocalDateTime end = LocalDateTime.parse(stringEnd, DateTimeFormatter.ofPattern(datePattern));
+        log.info("{}; /stats; start={}, end={}, uris={}, unique={}",
+                this.getClass(), start, end, uris, unique);
         List<Hit> hits = statisticService.getStatistic(start, end, uris, unique);
+        log.info("{}; got hits; {}", this.getClass(), hits);
         return HitMapper.toStatDtoOut(hits, "ewm-main-service", uris);
     }
 

@@ -8,7 +8,7 @@ import java.util.List;
 @Slf4j
 public class HitMapper {
     public static Hit toHit(HitDtoIn hitDtoIn) {
-        log.info("HitMapper; toHit; {}", hitDtoIn);
+        log.info("{}; toHit; {}", HitMapper.class, hitDtoIn);
         return Hit.builder()
                 .app(hitDtoIn.getApp())
                 .uri(hitDtoIn.getUri())
