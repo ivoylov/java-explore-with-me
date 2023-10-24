@@ -9,6 +9,7 @@ import ru.practicum.statisticservice.model.HitDtoIn;
 import ru.practicum.statisticservice.model.HitMapper;
 import ru.practicum.statisticservice.model.StatDtoOut;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -26,6 +27,7 @@ public class StatisticController {
         return "statistic server is work";
     }
 
+    @Transactional
     @PostMapping("/hit")
     public Hit putHit(@Validated(Create.class) @RequestBody HitDtoIn hitDtoIn) {
         log.info("{}; /hitDtoIn; {}", this.getClass(), hitDtoIn);
@@ -36,10 +38,11 @@ public class StatisticController {
         return savedHit;
     }
 
+    @Transactional
     @GetMapping("/stats")
     public StatDtoOut getHits(@RequestParam("start") String stringStart,
                               @RequestParam("end") String stringEnd,
-                              @RequestParam String[] uris,
+                              @RequestParam(defaultValue = "") List<String> uris,
                               @RequestParam Boolean unique) {
         log.info("{}; /stats; stringStart={}, stringEnd={}, uris={}, unique={}",
                 this.getClass(), stringStart, stringEnd, uris, unique);

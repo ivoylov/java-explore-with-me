@@ -14,13 +14,14 @@ import ru.practicum.mainservice.model.HitDtoIn;
 import ru.practicum.mainservice.model.StatDtoOut;
 
 import java.util.Arrays;
+import java.util.List;
 
 @RestController
 @Slf4j
 public class MainController {
 
-    @Value(value = "${server-stat-url}")
-    private String serverStatURL;
+    @Value(value = "${stat-server.url}")
+    private String statServerURL;
 
     @GetMapping("/ping")
     public String ping() {
@@ -33,7 +34,7 @@ public class MainController {
         log.info("{}; /hit; {}", this.getClass(), hitDtoIn);
         WebClient webClient = WebClient.create();
         Mono<Hit> statisticServerAnswer = webClient.post()
-                .uri(serverStatURL + "/hit")
+                .uri(statServerURL + "/hit")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromValue(hitDtoIn))
                 .retrieve()
@@ -44,14 +45,14 @@ public class MainController {
     @GetMapping("/stats")
     public StatDtoOut getHits(@RequestParam("start") String stringStart,
                               @RequestParam("end") String stringEnd,
-                              @RequestParam String[] uris,
-                              @RequestParam Boolean unique) {
+                              @RequestParam (defaultValue = "") List<String> uris,
+                              @RequestParam (defaultValue = "true") Boolean unique) {
         log.info("{}; /stats; stringStart={}, stringEnd={}, uris={}, unique={}",
                 this.getClass(), stringStart, stringEnd, uris, unique);
         WebClient webClient = WebClient.create();
         Mono<StatDtoOut> statisticAnswer = webClient.get()
-                .uri(String.format(serverStatURL + "/stats?start=%s&end=%s&uris=%s&unique=%s",
-                        stringStart, stringEnd, Arrays.toString(uris), unique.toString()))
+                .uri(String.format(statServerURL + "/stats?start=%s&end=%s&uris=%s&unique=%s",
+                        stringStart, stringEnd, uris, unique.toString()))
                 .retrieve()
                 .bodyToMono(StatDtoOut.class);
         return statisticAnswer.blockOptional().get();

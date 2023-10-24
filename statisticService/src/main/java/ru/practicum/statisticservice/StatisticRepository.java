@@ -15,6 +15,12 @@ public interface StatisticRepository extends JpaRepository<Hit, Long> {
             "WHERE (hit_timestamp between :start and :end) " +
             "and (hit_uri in :uris)",
             nativeQuery = true)
-    List<Hit> find(LocalDateTime start, LocalDateTime end, String[] uris);
+    List<Hit> findSomeUris(LocalDateTime start, LocalDateTime end, List<String> uris);
+
+    @Query(value = "SELECT * " +
+            "FROM hits " +
+            "WHERE (hit_timestamp between :start and :end)",
+            nativeQuery = true)
+    List<Hit> findAllUris(LocalDateTime start, LocalDateTime end);
 
 }

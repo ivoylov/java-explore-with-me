@@ -17,7 +17,7 @@ public class HitMapper {
                 .build();
     }
 
-    public static StatDtoOut toStatDtoOut(List<Hit> hits, String app, String[] uris) {
+    public static StatDtoOut toStatDtoOut(List<Hit> hits, String app, List<String> uris) {
         log.info("HitMapper; toStatDtoOut");
         return StatDtoOut.builder()
                 .app(app)

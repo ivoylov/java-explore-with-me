@@ -20,9 +20,16 @@ public class StatisticService {
         return statisticRepository.save(hit);
     }
 
-    public List<Hit> getStatistic(LocalDateTime start, LocalDateTime end, String[] uris, Boolean unique) {
+    public List<Hit> getStatistic(LocalDateTime start, LocalDateTime end, List<String> uris, Boolean unique) {
         log.info("{}; /getStatistic; start={}, end={}, uris={}, unique={}", this.getClass(), start, end, uris, unique);
-        List<Hit> hits = statisticRepository.find(start, end, uris);
+        List<Hit> hits;
+        if (uris.size() == 0) {
+            log.info("get all uris, because uris.size = 0");
+            hits = statisticRepository.findAllUris(start, end);
+        } else {
+            log.info("get some uris, because uris.size != 0");
+            hits = statisticRepository.findSomeUris(start, end, uris);
+        }
         log.info("{}; got hits; {}", this.getClass(), hits);
         if (unique) {
             Set<Hit> setHits = new TreeSet<>(Comparator.comparing(Hit::getIp));
