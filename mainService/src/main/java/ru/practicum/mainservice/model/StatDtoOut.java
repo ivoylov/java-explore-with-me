@@ -13,6 +13,6 @@ import java.util.List;
 @Builder
 public class StatDtoOut {
     private String app;
-    private List<String> uris;
+    private List<String> uri;
     private Integer hits;
 }

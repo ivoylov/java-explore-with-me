@@ -1,13 +1,11 @@
 package ru.practicum.mainservice;
 
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.validator.internal.util.Contracts;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.lang.Nullable;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.http.MediaType;
+import org.springframework.lang.Nullable;
 import org.springframework.validation.annotation.Validated;
-
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -16,8 +14,6 @@ import ru.practicum.mainservice.model.HitDtoIn;
 import ru.practicum.mainservice.model.StatDtoOut;
 
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 @RestController

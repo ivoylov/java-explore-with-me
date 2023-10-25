@@ -10,7 +10,6 @@ import ru.practicum.statisticservice.model.HitDtoIn;
 import ru.practicum.statisticservice.model.HitMapper;
 import ru.practicum.statisticservice.model.StatDtoOut;
 
-import javax.print.DocFlavor;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
