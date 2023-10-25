@@ -50,7 +50,7 @@ public class MainController {
     public StatDtoOut getHits(@RequestParam("start") String stringStart,
                               @RequestParam("end") String stringEnd,
                               @RequestParam @Nullable List<String> uris,
-                              @RequestParam (defaultValue = "true") Boolean unique) {
+                              @RequestParam (defaultValue = "false") Boolean unique) {
         log.info("{}; /stats; stringStart={}, stringEnd={}, uris={}, unique={}",
                 this.getClass(), stringStart, stringEnd, uris, unique);
         WebClient webClient = WebClient.create();

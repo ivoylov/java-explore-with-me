@@ -46,14 +46,14 @@ public class StatisticController {
     public StatDtoOut getHits(@RequestParam("start") String stringStart,
                               @RequestParam("end") String stringEnd,
                               @RequestParam @Nullable List<String> uris,
-                              @RequestParam Boolean unique) {
+                              @RequestParam (defaultValue = "false") Boolean unique) {
         log.info("{}; /stats; stringStart={}, stringEnd={}, uris={}, unique={}",
                 this.getClass(), stringStart, stringEnd, uris, unique);
-        String datePattern = "yyyy-MM-dd'T'HH:mm:ss";
+        String datePattern = "yyyy-MM-dd HH:mm:ss";
         LocalDateTime start = LocalDateTime.parse(stringStart, DateTimeFormatter.ofPattern(datePattern));
         LocalDateTime end = LocalDateTime.parse(stringEnd, DateTimeFormatter.ofPattern(datePattern));
         List<String> correctUris = new ArrayList<>();
-        if (!uris.get(0).equals("null")) {
+        if (uris != null && !uris.get(0).equals("null")) {
             for (String string : uris) {
                 correctUris.add(string.replace("[", "").replace("]",""));
             }
