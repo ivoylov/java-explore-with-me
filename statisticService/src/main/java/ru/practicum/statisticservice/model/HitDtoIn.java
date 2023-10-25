@@ -22,5 +22,5 @@ public class HitDtoIn {
     @NotBlank(groups = Create.class, message = "ip не может быть пустым")
     private String ip;
     @NotNull(groups = Create.class, message = "timestamp не может быть пустым")
-    private LocalDateTime timestamp;
+    private String timestamp;
 }
