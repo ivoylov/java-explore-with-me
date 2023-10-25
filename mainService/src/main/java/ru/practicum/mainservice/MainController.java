@@ -1,7 +1,9 @@
 package ru.practicum.mainservice;
 
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.validator.internal.util.Contracts;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -14,6 +16,8 @@ import ru.practicum.mainservice.model.HitDtoIn;
 import ru.practicum.mainservice.model.StatDtoOut;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -45,14 +49,14 @@ public class MainController {
     @GetMapping("/stats")
     public StatDtoOut getHits(@RequestParam("start") String stringStart,
                               @RequestParam("end") String stringEnd,
-                              @RequestParam (defaultValue = "") List<String> uris,
+                              @RequestParam @Nullable List<String> uris,
                               @RequestParam (defaultValue = "true") Boolean unique) {
         log.info("{}; /stats; stringStart={}, stringEnd={}, uris={}, unique={}",
                 this.getClass(), stringStart, stringEnd, uris, unique);
         WebClient webClient = WebClient.create();
         Mono<StatDtoOut> statisticAnswer = webClient.get()
                 .uri(String.format(statServerURL + "/stats?start=%s&end=%s&uris=%s&unique=%s",
-                        stringStart, stringEnd, uris, unique.toString()))
+                        stringStart, stringEnd, uris == null ? null : Arrays.toString(uris.toArray()), unique.toString()))
                 .retrieve()
                 .bodyToMono(StatDtoOut.class);
         return statisticAnswer.blockOptional().get();

@@ -2,6 +2,7 @@ package ru.practicum.statisticservice;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.lang.Nullable;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.statisticservice.model.Hit;
@@ -9,9 +10,11 @@ import ru.practicum.statisticservice.model.HitDtoIn;
 import ru.practicum.statisticservice.model.HitMapper;
 import ru.practicum.statisticservice.model.StatDtoOut;
 
+import javax.print.DocFlavor;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -42,18 +45,24 @@ public class StatisticController {
     @GetMapping("/stats")
     public StatDtoOut getHits(@RequestParam("start") String stringStart,
                               @RequestParam("end") String stringEnd,
-                              @RequestParam(defaultValue = "") List<String> uris,
+                              @RequestParam @Nullable List<String> uris,
                               @RequestParam Boolean unique) {
         log.info("{}; /stats; stringStart={}, stringEnd={}, uris={}, unique={}",
                 this.getClass(), stringStart, stringEnd, uris, unique);
         String datePattern = "yyyy-MM-dd'T'HH:mm:ss";
         LocalDateTime start = LocalDateTime.parse(stringStart, DateTimeFormatter.ofPattern(datePattern));
         LocalDateTime end = LocalDateTime.parse(stringEnd, DateTimeFormatter.ofPattern(datePattern));
+        List<String> correctUris = new ArrayList<>();
+        if (!uris.get(0).equals("null")) {
+            for (String string : uris) {
+                correctUris.add(string.replace("[", "").replace("]",""));
+            }
+        }
         log.info("{}; /stats; start={}, end={}, uris={}, unique={}",
                 this.getClass(), start, end, uris, unique);
-        List<Hit> hits = statisticService.getStatistic(start, end, uris, unique);
+        List<Hit> hits = statisticService.getStatistic(start, end, correctUris, unique);
         log.info("{}; got hits; {}", this.getClass(), hits);
-        return HitMapper.toStatDtoOut(hits, "ewm-main-service", uris);
+        return HitMapper.toStatDtoOut(hits, "ewm-main-service", correctUris);
     }
 
 }
