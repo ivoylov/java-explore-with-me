@@ -7,6 +7,7 @@ import ru.practicum.statisticservice.model.Hit;
 import ru.practicum.statisticservice.model.StatDtoOut;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service
@@ -65,12 +66,24 @@ public class StatisticService {
             result.add(new StatDtoOut(app, stat.getKey(), visitCount));
         }
         log.info("{}; prepared StatDtoOut list; {}", this.getClass(), result);
+        result.sort(Comparator.comparing(StatDtoOut::getHits));
         return result;
     }
 
-    public List<StatDtoOut> getStatistic(LocalDateTime start, LocalDateTime end, List<String> uris, Boolean unique, String app) {
+    public List<StatDtoOut> getStatistic(String stringStart, String stringEnd, List<String> uris, Boolean unique, String app) {
+        String datePattern = "yyyy-MM-dd HH:mm:ss";
+        LocalDateTime start = LocalDateTime.parse(stringStart, DateTimeFormatter.ofPattern(datePattern));
+        LocalDateTime end = LocalDateTime.parse(stringEnd, DateTimeFormatter.ofPattern(datePattern));
+        List<String> correctUris = new ArrayList<>();
+        if (uris != null && !uris.get(0).equals("null")) {
+            for (String string : uris) {
+                correctUris.add(string.replace("[", "").replace("]",""));
+            }
+        }
+        log.info("{}; /stats; start={}, end={}, uris={}, unique={}",
+                this.getClass(), start, end, correctUris, unique);
         log.info("{}; get statistic", this.getClass());
-        List<Hit> hits = getHits(start, end, uris, unique);
+        List<Hit> hits = getHits(start, end, correctUris, unique);
         log.info("{}; get hits; {}", this.getClass(), hits);
         List<StatDtoOut> statDtoOutList = prepareStatistic(hits, unique, app);
         log.info("{}; get StatDtoOut list; {}", this.getClass(), statDtoOutList);

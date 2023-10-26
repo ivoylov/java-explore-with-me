@@ -11,9 +11,6 @@ import ru.practicum.statisticservice.model.HitMapper;
 import ru.practicum.statisticservice.model.StatDtoOut;
 
 import javax.transaction.Transactional;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -48,18 +45,7 @@ public class StatisticController {
                               @RequestParam (defaultValue = "false") Boolean unique) {
         log.info("{}; /stats; stringStart={}, stringEnd={}, uris={}, unique={}",
                 this.getClass(), stringStart, stringEnd, uris, unique);
-        String datePattern = "yyyy-MM-dd HH:mm:ss";
-        LocalDateTime start = LocalDateTime.parse(stringStart, DateTimeFormatter.ofPattern(datePattern));
-        LocalDateTime end = LocalDateTime.parse(stringEnd, DateTimeFormatter.ofPattern(datePattern));
-        List<String> correctUris = new ArrayList<>();
-        if (uris != null && !uris.get(0).equals("null")) {
-            for (String string : uris) {
-                correctUris.add(string.replace("[", "").replace("]",""));
-            }
-        }
-        log.info("{}; /stats; start={}, end={}, uris={}, unique={}",
-                this.getClass(), start, end, uris, unique);
-        return statisticService.getStatistic(start, end, correctUris, unique, "ewm-main-service");
+        return statisticService.getStatistic(stringStart, stringEnd, uris, unique, "ewm-main-service");
     }
 
 }
