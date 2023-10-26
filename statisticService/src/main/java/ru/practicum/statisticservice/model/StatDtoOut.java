@@ -7,12 +7,12 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Data
 public class StatDtoOut {
     private String app;
-    private List<String> uri;
+    private String uri;
     private Integer hits;
 }

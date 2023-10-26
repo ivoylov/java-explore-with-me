@@ -19,12 +19,12 @@ public class HitMapper {
                 .build();
     }
 
-    public static StatDtoOut toStatDtoOut(List<Hit> hits, String app, List<String> uri) {
-        log.info("HitMapper; toStatDtoOut");
+    public static StatDtoOut toStatDtoOut(Hit hit) {
+        log.info("HitMapper; toListStatDtoOut");
         return StatDtoOut.builder()
-                .app(app)
-                .uri(uri)
-                .hits(hits.size())
+                .app(hit.getApp())
+                .uri(hit.getUri())
+                .hits(1)
                 .build();
     }
 

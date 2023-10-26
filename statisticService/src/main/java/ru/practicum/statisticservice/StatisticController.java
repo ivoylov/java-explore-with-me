@@ -42,7 +42,7 @@ public class StatisticController {
 
     @Transactional
     @GetMapping("/stats")
-    public StatDtoOut getHits(@RequestParam("start") String stringStart,
+    public List<StatDtoOut> getHits(@RequestParam("start") String stringStart,
                               @RequestParam("end") String stringEnd,
                               @RequestParam @Nullable List<String> uris,
                               @RequestParam (defaultValue = "false") Boolean unique) {
@@ -59,9 +59,7 @@ public class StatisticController {
         }
         log.info("{}; /stats; start={}, end={}, uris={}, unique={}",
                 this.getClass(), start, end, uris, unique);
-        List<Hit> hits = statisticService.getStatistic(start, end, correctUris, unique);
-        log.info("{}; got hits; {}", this.getClass(), hits);
-        return HitMapper.toStatDtoOut(hits, "ewm-main-service", correctUris);
+        return statisticService.getStatistic(start, end, correctUris, unique, "ewm-main-service");
     }
 
 }

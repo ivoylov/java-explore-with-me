@@ -13,6 +13,7 @@ import ru.practicum.mainservice.model.Hit;
 import ru.practicum.mainservice.model.HitDtoIn;
 import ru.practicum.mainservice.model.StatDtoOut;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -44,9 +45,9 @@ public class MainController {
 
     @GetMapping("/stats")
     public StatDtoOut getHits(@RequestParam("start") String stringStart,
-                              @RequestParam("end") String stringEnd,
-                              @RequestParam @Nullable List<String> uris,
-                              @RequestParam (defaultValue = "false") Boolean unique) {
+                                         @RequestParam("end") String stringEnd,
+                                         @RequestParam @Nullable List<String> uris,
+                                         @RequestParam (defaultValue = "false") Boolean unique) {
         log.info("{}; /stats; stringStart={}, stringEnd={}, uris={}, unique={}",
                 this.getClass(), stringStart, stringEnd, uris, unique);
         WebClient webClient = WebClient.create();
