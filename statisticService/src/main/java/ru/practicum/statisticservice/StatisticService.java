@@ -66,7 +66,7 @@ public class StatisticService {
             result.add(new StatDtoOut(app, stat.getKey(), visitCount));
         }
         log.info("{}; prepared StatDtoOut list; {}", this.getClass(), result);
-        result.sort(Comparator.comparing(StatDtoOut::getHits));
+        result.sort(Comparator.comparing(StatDtoOut::getHits).reversed());
         return result;
     }
 
