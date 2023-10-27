@@ -1,9 +1,6 @@
 package ru.practicum.mainservice.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
@@ -15,7 +12,7 @@ import java.time.LocalDateTime;
 @Builder
 @Entity
 @Table(name = "hits", schema = "public")
-@FieldDefaults
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Hit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

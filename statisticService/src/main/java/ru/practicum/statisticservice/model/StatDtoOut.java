@@ -1,16 +1,13 @@
 package ru.practicum.statisticservice.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Data
-@FieldDefaults
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class StatDtoOut {
     String app;
     String uri;

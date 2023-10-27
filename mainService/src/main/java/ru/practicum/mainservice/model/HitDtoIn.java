@@ -1,9 +1,6 @@
 package ru.practicum.mainservice.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 import ru.practicum.mainservice.Create;
 
@@ -15,7 +12,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@FieldDefaults
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class HitDtoIn {
     @NotBlank(groups = Create.class, message = "app не может быть пустым")
     String app;

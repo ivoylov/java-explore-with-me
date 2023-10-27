@@ -1,9 +1,6 @@
 package ru.practicum.statisticservice.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 import ru.practicum.statisticservice.Create;
 
@@ -14,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@FieldDefaults
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class HitDtoIn {
     @NotBlank(groups = Create.class, message = "app не может быть пустым")
     String app;
