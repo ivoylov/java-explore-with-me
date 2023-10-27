@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -14,17 +15,18 @@ import java.time.LocalDateTime;
 @Builder
 @Entity
 @Table(name = "hits", schema = "public")
+@FieldDefaults
 public class Hit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "hit_id")
-    private Long id;
+    Long id;
     @Column(name = "hit_app")
-    private String app;
+    String app;
     @Column(name = "hit_uri")
-    private String uri;
+    String uri;
     @Column(name = "hit_ip")
-    private String ip;
+    String ip;
     @Column(name = "hit_timestamp")
-    private LocalDateTime timestamp;
+    LocalDateTime timestamp;
 }

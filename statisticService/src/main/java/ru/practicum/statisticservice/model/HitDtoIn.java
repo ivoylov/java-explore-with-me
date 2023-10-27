@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import ru.practicum.statisticservice.Create;
 
 import javax.validation.constraints.NotBlank;
@@ -13,13 +14,14 @@ import javax.validation.constraints.NotNull;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@FieldDefaults
 public class HitDtoIn {
     @NotBlank(groups = Create.class, message = "app не может быть пустым")
-    private String app;
+    String app;
     @NotBlank(groups = Create.class, message = "uri не может быть пустым")
-    private String uri;
+    String uri;
     @NotBlank(groups = Create.class, message = "ip не может быть пустым")
-    private String ip;
+    String ip;
     @NotNull(groups = Create.class, message = "timestamp не может быть пустым")
-    private String timestamp;
+    String timestamp;
 }

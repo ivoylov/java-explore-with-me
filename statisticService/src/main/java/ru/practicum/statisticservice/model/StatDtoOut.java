@@ -4,15 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
+import lombok.experimental.FieldDefaults;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Data
+@FieldDefaults
 public class StatDtoOut {
-    private String app;
-    private String uri;
-    private Integer hits;
+    String app;
+    String uri;
+    Integer hits;
 }

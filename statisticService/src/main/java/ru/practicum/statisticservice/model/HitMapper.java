@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 @Slf4j
 public class HitMapper {
@@ -18,14 +17,4 @@ public class HitMapper {
                 .timestamp(LocalDateTime.parse(hitDtoIn.getTimestamp(), DateTimeFormatter.ofPattern(datePattern)))
                 .build();
     }
-
-    public static StatDtoOut toStatDtoOut(Hit hit) {
-        log.info("HitMapper; toListStatDtoOut");
-        return StatDtoOut.builder()
-                .app(hit.getApp())
-                .uri(hit.getUri())
-                .hits(1)
-                .build();
-    }
-
 }
