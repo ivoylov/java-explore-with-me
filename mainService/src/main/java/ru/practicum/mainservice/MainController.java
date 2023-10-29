@@ -9,11 +9,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
-import ru.practicum.mainservice.model.Hit;
-import ru.practicum.mainservice.model.HitDtoIn;
-import ru.practicum.mainservice.model.StatDtoOut;
+import ru.practicum.mainservice.models.Hit;
+import ru.practicum.mainservice.models.HitDtoIn;
+import ru.practicum.mainservice.models.StatDtoOut;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

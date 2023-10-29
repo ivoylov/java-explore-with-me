@@ -1,4 +1,4 @@
-package ru.practicum.mainservice.model;
+package ru.practicum.mainservice.models;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
