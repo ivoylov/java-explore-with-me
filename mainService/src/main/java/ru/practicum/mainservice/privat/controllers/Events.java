@@ -3,18 +3,13 @@ package ru.practicum.mainservice.privat.controllers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
 @Slf4j
+@RestController("PrivateEventsController")
 @RequestMapping("users/{userId}/events")
 public class Events {
 
     @PostMapping
     public void create() {
-
-    }
-
-    @PatchMapping("{eventId}")
-    public void change() {
 
     }
 
@@ -26,6 +21,11 @@ public class Events {
 
     @GetMapping
     public void getAll() {
+
+    }
+
+    @PatchMapping("/{eventId}")
+    public void change() {
 
     }
 

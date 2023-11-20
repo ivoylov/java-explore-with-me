@@ -3,10 +3,10 @@ package ru.practicum.mainservice.admin.controllers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
 @Slf4j
+@RestController("AdminEventsController")
 @RequestMapping("/admin/events")
-public class Events {
+class Events {
 
     @GetMapping
     public void get() {
