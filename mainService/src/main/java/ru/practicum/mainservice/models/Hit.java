@@ -2,6 +2,7 @@ package ru.practicum.mainservice.models;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
