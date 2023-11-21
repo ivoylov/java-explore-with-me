@@ -3,7 +3,6 @@ package ru.practicum.mainservice.models;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Data

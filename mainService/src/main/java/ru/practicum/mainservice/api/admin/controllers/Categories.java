@@ -1,10 +1,10 @@
-package ru.practicum.mainservice.admin.controllers;
+package ru.practicum.mainservice.api.admin.controllers;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.mainservice.admin.CategoriesService;
+import ru.practicum.mainservice.api.admin.services.CategoriesService;
 
 @RestController("AdminCategoriesController")
 @Slf4j
@@ -22,12 +22,12 @@ public class Categories {
 
     @PatchMapping("/{catId}")
     public void change() {
-
+        categoriesService.change();
     }
 
     @DeleteMapping("/{catId}")
     public void delete() {
-
+        categoriesService.delete();
     }
 
 }
