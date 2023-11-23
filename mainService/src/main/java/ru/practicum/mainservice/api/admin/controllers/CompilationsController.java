@@ -7,7 +7,7 @@ import ru.practicum.mainservice.api.admin.services.CompilationsService;
 @RestController("AdminCompilationsController")
 @Slf4j
 @RequestMapping("/admin/compilations")
-public class Compilations {
+public class CompilationsController {
 
     CompilationsService compilationsService;
 

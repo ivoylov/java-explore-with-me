@@ -7,7 +7,7 @@ import ru.practicum.mainservice.api.admin.services.EventsService;
 @Slf4j
 @RestController("AdminEventsController")
 @RequestMapping("/admin/events")
-class Events {
+class EventsController {
 
     EventsService eventsService;
 

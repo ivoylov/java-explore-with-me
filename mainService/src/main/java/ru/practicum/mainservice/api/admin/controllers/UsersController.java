@@ -2,8 +2,8 @@ package ru.practicum.mainservice.api.admin.controllers;
 
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.mainservice.Create;
 import ru.practicum.mainservice.api.admin.services.UsersService;
 import ru.practicum.mainservice.models.user.User;
 import ru.practicum.mainservice.models.user.UserDtoIn;
@@ -15,8 +15,9 @@ import javax.validation.Valid;
 @RestController("AdminUsersController")
 @Slf4j
 @RequestMapping("/admin/users")
-public class Users {
+public class UsersController {
 
+    @Autowired
     UsersService usersService;
 
     @PostMapping

@@ -11,7 +11,7 @@ import ru.practicum.mainservice.api.admin.services.CategoriesService;
 @AllArgsConstructor
 @NoArgsConstructor
 @RequestMapping("/admin/categories")
-public class Categories {
+public class CategoriesController {
 
     CategoriesService categoriesService;
 
