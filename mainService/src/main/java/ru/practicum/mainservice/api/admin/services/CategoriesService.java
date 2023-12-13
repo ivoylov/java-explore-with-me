@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 @Service("AdminCategoriesService")
 public class CategoriesService {
+
     public void create() {
 
     }
