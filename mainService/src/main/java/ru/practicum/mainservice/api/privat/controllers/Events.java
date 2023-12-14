@@ -6,7 +6,7 @@ import ru.practicum.mainservice.api.privat.services.EventsService;
 
 @Slf4j
 @RestController("PrivateEventsController")
-@RequestMapping("users/{userId}/events")
+@RequestMapping("/users/{userId}/events")
 public class Events {
 
     EventsService eventsService;
@@ -20,7 +20,6 @@ public class Events {
     public void get() {
         eventsService.get();
     }
-
 
     @GetMapping
     public void getAll() {
