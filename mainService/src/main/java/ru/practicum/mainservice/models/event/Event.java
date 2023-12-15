@@ -30,4 +30,8 @@ public class Event {
     Integer participantLimit;
     @Column(name = "paid")
     Boolean paid;
+    @Column(name = "lat")
+    Double lat;
+    @Column(name = "lon")
+    Double lon;
 }

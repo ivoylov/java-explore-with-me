@@ -1,6 +1,7 @@
 package ru.practicum.mainservice.models.event;
 
 import lombok.experimental.UtilityClass;
+import ru.practicum.mainservice.models.Location;
 
 @UtilityClass
 public class EventMapper {
@@ -13,6 +14,8 @@ public class EventMapper {
                 .eventDate(eventDtoIn.getEventDate())
                 .participantLimit(eventDtoIn.getParticipantLimit())
                 .paid(eventDtoIn.getPaid())
+                .lat(eventDtoIn.getLocation().getLat())
+                .lon(eventDtoIn.getLocation().getLon())
                 .build();
     }
 
@@ -25,6 +28,7 @@ public class EventMapper {
                 .eventDate(event.getEventDate())
                 .participantLimit(event.getParticipantLimit())
                 .paid(event.getPaid())
+                .location(new Location(event.getLat(), event.getLon()))
                 .build();
     }
 

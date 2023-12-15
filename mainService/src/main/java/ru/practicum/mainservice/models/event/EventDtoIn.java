@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.format.annotation.DateTimeFormat;
+import ru.practicum.mainservice.models.Location;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -28,4 +29,6 @@ public class EventDtoIn {
     Integer participantLimit;
     @NotNull
     Boolean paid;
+    @NotNull
+    Location location;
 }

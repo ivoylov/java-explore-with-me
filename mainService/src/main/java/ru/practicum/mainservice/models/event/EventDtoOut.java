@@ -2,6 +2,7 @@ package ru.practicum.mainservice.models.event;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import ru.practicum.mainservice.models.Location;
 
 import java.time.LocalDateTime;
 
@@ -18,4 +19,5 @@ public class EventDtoOut {
     LocalDateTime eventDate;
     Integer participantLimit;
     Boolean paid;
+    Location location;
 }

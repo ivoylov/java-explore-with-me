@@ -14,5 +14,7 @@ CREATE TABLE IF NOT EXISTS events (
     description varchar(255) not null,
     event_date timestamp without time zone,
     participant_limit int not null,
-    paid bool not null
+    paid bool not null,
+    lat float not null,
+    lon float not null
 );
