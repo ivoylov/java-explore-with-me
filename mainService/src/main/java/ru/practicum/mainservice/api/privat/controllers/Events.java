@@ -1,19 +1,28 @@
 package ru.practicum.mainservice.api.privat.controllers;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.mainservice.api.privat.services.EventsService;
+import ru.practicum.mainservice.models.event.Event;
+import ru.practicum.mainservice.models.event.EventDtoIn;
+import ru.practicum.mainservice.models.event.EventDtoOut;
+import ru.practicum.mainservice.models.event.EventMapper;
+
+import javax.validation.Valid;
 
 @Slf4j
 @RestController("PrivateEventsController")
 @RequestMapping("/users/{userId}/events")
 public class Events {
 
+    @Autowired
     EventsService eventsService;
 
     @PostMapping
-    public void create() {
-        eventsService.create();
+    public EventDtoOut create(@PathVariable Long userId, @Valid @RequestBody EventDtoIn eventDtoIn) {
+        Event event = EventMapper.toEvent(eventDtoIn);
+        return EventMapper.toEventDtoOut(eventsService.create(event));
     }
 
     @GetMapping("{eventId}")
