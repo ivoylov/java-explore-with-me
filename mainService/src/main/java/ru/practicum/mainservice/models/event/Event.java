@@ -24,6 +24,8 @@ public class Event {
     String annotation;
     @Column(name = "description")
     String description;
-    @Column(name = "eventDate")
+    @Column(name = "event_date")
     LocalDateTime eventDate;
+    @Column(name = "participant_limit")
+    Integer participantLimit;
 }

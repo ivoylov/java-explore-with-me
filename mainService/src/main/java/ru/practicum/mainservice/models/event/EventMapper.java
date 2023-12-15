@@ -11,6 +11,7 @@ public class EventMapper {
                 .annotation(eventDtoIn.getAnnotation())
                 .description(eventDtoIn.getDescription())
                 .eventDate(eventDtoIn.getEventDate())
+                .participantLimit(eventDtoIn.getParticipantLimit())
                 .build();
     }
 
@@ -21,6 +22,7 @@ public class EventMapper {
                 .annotation(event.getAnnotation())
                 .description(event.getDescription())
                 .eventDate(event.getEventDate())
+                .participantLimit(event.getParticipantLimit())
                 .build();
     }
 
