@@ -17,4 +17,5 @@ public class EventDtoOut {
     String description;
     LocalDateTime eventDate;
     Integer participantLimit;
+    Boolean paid;
 }

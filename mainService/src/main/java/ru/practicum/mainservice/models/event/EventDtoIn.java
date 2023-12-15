@@ -26,4 +26,6 @@ public class EventDtoIn {
     LocalDateTime eventDate;
     @NotNull
     Integer participantLimit;
+    @NotNull
+    Boolean paid;
 }

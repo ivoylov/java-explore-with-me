@@ -28,4 +28,6 @@ public class Event {
     LocalDateTime eventDate;
     @Column(name = "participant_limit")
     Integer participantLimit;
+    @Column(name = "paid")
+    Boolean paid;
 }

@@ -13,5 +13,6 @@ CREATE TABLE IF NOT EXISTS events (
     annotation varchar(255) not null,
     description varchar(255) not null,
     event_date timestamp without time zone,
-    participant_limit int not null
+    participant_limit int not null,
+    paid bool not null
 );

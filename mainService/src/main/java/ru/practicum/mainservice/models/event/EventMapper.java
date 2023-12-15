@@ -12,6 +12,7 @@ public class EventMapper {
                 .description(eventDtoIn.getDescription())
                 .eventDate(eventDtoIn.getEventDate())
                 .participantLimit(eventDtoIn.getParticipantLimit())
+                .paid(eventDtoIn.getPaid())
                 .build();
     }
 
@@ -23,6 +24,7 @@ public class EventMapper {
                 .description(event.getDescription())
                 .eventDate(event.getEventDate())
                 .participantLimit(event.getParticipantLimit())
+                .paid(event.getPaid())
                 .build();
     }
 
