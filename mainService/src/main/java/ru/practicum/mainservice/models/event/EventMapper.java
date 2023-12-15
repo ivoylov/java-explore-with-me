@@ -16,6 +16,7 @@ public class EventMapper {
                 .paid(eventDtoIn.getPaid())
                 .lat(eventDtoIn.getLocation().getLat())
                 .lon(eventDtoIn.getLocation().getLon())
+                .requestModeration(eventDtoIn.getRequestModeration())
                 .build();
     }
 
@@ -29,6 +30,7 @@ public class EventMapper {
                 .participantLimit(event.getParticipantLimit())
                 .paid(event.getPaid())
                 .location(new Location(event.getLat(), event.getLon()))
+                .requestModeration(event.getRequestModeration())
                 .build();
     }
 

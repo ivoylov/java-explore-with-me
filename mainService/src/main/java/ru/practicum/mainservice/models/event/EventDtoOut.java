@@ -20,4 +20,5 @@ public class EventDtoOut {
     Integer participantLimit;
     Boolean paid;
     Location location;
+    Boolean requestModeration;
 }

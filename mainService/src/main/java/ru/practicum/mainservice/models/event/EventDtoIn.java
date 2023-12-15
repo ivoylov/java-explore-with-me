@@ -31,4 +31,6 @@ public class EventDtoIn {
     Boolean paid;
     @NotNull
     Location location;
+    @NotNull
+    Boolean requestModeration;
 }

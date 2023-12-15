@@ -16,5 +16,6 @@ CREATE TABLE IF NOT EXISTS events (
     participant_limit int not null,
     paid bool not null,
     lat float not null,
-    lon float not null
+    lon float not null,
+    request_moderation bool not null
 );

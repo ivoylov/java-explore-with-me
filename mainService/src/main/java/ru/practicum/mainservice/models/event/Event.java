@@ -34,4 +34,6 @@ public class Event {
     Double lat;
     @Column(name = "lon")
     Double lon;
+    @Column(name = "request_moderation")
+    Boolean requestModeration;
 }
