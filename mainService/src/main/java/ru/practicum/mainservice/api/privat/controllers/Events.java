@@ -22,7 +22,7 @@ public class Events {
     @PostMapping
     public EventDtoOut create(@PathVariable Long userId, @Valid @RequestBody EventDtoIn eventDtoIn) {
         Event event = EventMapper.toEvent(eventDtoIn);
-        return EventMapper.toEventDtoOut(eventsService.create(event));
+        return EventMapper.toEventDtoOut(eventsService.create(event, userId));
     }
 
     @GetMapping("{eventId}")

@@ -20,4 +20,11 @@ public class UserMapper {
                 .build();
     }
 
+    public UserDtoOutShort toUserDtoOutShort(User user) {
+        return UserDtoOutShort.builder()
+                .id(user.getId())
+                .name(user.getName())
+                .build();
+    }
+
 }

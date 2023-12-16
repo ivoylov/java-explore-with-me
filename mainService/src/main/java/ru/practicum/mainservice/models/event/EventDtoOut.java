@@ -3,6 +3,7 @@ package ru.practicum.mainservice.models.event;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import ru.practicum.mainservice.models.Location;
+import ru.practicum.mainservice.models.user.UserDtoOutShort;
 
 import java.time.LocalDateTime;
 
@@ -21,4 +22,5 @@ public class EventDtoOut {
     Boolean paid;
     Location location;
     Boolean requestModeration;
+    UserDtoOutShort initiator;
 }

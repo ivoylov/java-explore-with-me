@@ -20,6 +20,10 @@ public class UsersService {
         return userRepository.save(user);
     }
 
+    public User getById(Long userId) {
+        return userRepository.findById(userId).orElseThrow();
+    }
+
     public List<User> getAll(Pageable pageable) {
         return userRepository.findAll(pageable).getContent();
     }

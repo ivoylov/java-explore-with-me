@@ -33,4 +33,6 @@ public class EventDtoIn {
     Location location;
     @NotNull
     Boolean requestModeration;
+/*    @NotNull
+    Integer category;*/
 }

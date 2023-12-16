@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS explore_with_me_users (
 
 CREATE TABLE IF NOT EXISTS events (
     id bigint not null generated always as identity primary key,
+    initiator bigint not null references explore_with_me_users(id),
     title varchar(255) not null,
     annotation varchar(255) not null,
     description varchar(255) not null,
