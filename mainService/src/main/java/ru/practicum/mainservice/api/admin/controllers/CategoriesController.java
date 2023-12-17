@@ -4,12 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.mainservice.api.admin.services.CategoriesService;
 import ru.practicum.mainservice.models.category.Category;
 import ru.practicum.mainservice.models.category.CategoryDtoIn;
 import ru.practicum.mainservice.models.category.CategoryDtoOut;
 import ru.practicum.mainservice.models.category.CategoryMapper;
+
+import javax.validation.Valid;
 
 @RestController("AdminCategoriesController")
 @Slf4j
@@ -22,14 +25,16 @@ public class CategoriesController {
     CategoriesService categoriesService;
 
     @PostMapping
-    public CategoryDtoOut create(@RequestBody CategoryDtoIn categoryDtoIn) {
+    public CategoryDtoOut create(@RequestBody @Valid CategoryDtoIn categoryDtoIn) {
         Category category = CategoryMapper.toCategory(categoryDtoIn);
         return CategoryMapper.toCategoryDtoOut(categoriesService.create(category));
     }
 
     @PatchMapping("/{catId}")
-    public void change() {
-        categoriesService.change();
+    public CategoryDtoOut change(@RequestBody @Valid CategoryDtoIn categoryDtoIn,
+                       @PathVariable Long catId) {
+        Category category = CategoryMapper.toCategory(categoryDtoIn);
+        return CategoryMapper.toCategoryDtoOut(categoriesService.change(category, catId));
     }
 
     @DeleteMapping("/{catId}")
