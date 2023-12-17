@@ -20,3 +20,8 @@ CREATE TABLE IF NOT EXISTS events (
     lon float not null,
     request_moderation bool not null
 );
+
+CREATE TABLE IF NOT EXISTS categories (
+    id bigint not null generated always as identity primary key,
+    name varchar(50) not null
+)
