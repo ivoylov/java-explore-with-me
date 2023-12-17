@@ -26,8 +26,8 @@ public class CategoriesService {
     }
 
     @Transactional
-    public void delete() {
-
+    public void delete(Long catId) {
+        categoryRepository.deleteById(catId);
     }
 
 }

@@ -38,8 +38,8 @@ public class CategoriesController {
     }
 
     @DeleteMapping("/{catId}")
-    public void delete() {
-        categoriesService.delete();
+    public void delete(@PathVariable Long catId) {
+        categoriesService.delete(catId);
     }
 
 }
