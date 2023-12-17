@@ -31,8 +31,9 @@ public class UsersController {
 
     @GetMapping
     public List<User> getAll(@RequestParam(defaultValue = "0") Integer from,
-                             @RequestParam(defaultValue = "10") Integer size) {
-        return usersService.getAll(PageRequest.of(from,size));
+                             @RequestParam(defaultValue = "10") Integer size,
+                             @RequestParam(defaultValue = "") Long[] ids) {
+        return usersService.getAll(PageRequest.of(from,size), ids);
     }
 
     @DeleteMapping("/{userId}")

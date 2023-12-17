@@ -35,4 +35,9 @@ public class EventDtoIn {
     Boolean requestModeration;
 /*    @NotNull
     Integer category;*/
+
+    public String getTitle() {
+        return title;
+    }
+
 }
