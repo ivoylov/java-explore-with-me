@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.mainservice.api.admin.services.CategoriesService;
 import ru.practicum.mainservice.models.category.Category;
@@ -19,12 +19,13 @@ import javax.validation.Valid;
 @AllArgsConstructor
 @NoArgsConstructor
 @RequestMapping("/admin/categories")
-public class CategoriesController {
+public class AdminCategoriesController {
 
     @Autowired
     CategoriesService categoriesService;
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public CategoryDtoOut create(@RequestBody @Valid CategoryDtoIn categoryDtoIn) {
         Category category = CategoryMapper.toCategory(categoryDtoIn);
         return CategoryMapper.toCategoryDtoOut(categoriesService.create(category));
@@ -38,6 +39,7 @@ public class CategoriesController {
     }
 
     @DeleteMapping("/{catId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long catId) {
         categoriesService.delete(catId);
     }

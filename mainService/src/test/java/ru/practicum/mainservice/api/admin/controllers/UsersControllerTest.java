@@ -18,7 +18,7 @@ import static org.mockito.ArgumentMatchers.any;
 class UsersControllerTest {
 
     @InjectMocks
-    UsersController usersController;
+    AdminUsersController usersController;
 
     @Mock
     UsersService usersService;
