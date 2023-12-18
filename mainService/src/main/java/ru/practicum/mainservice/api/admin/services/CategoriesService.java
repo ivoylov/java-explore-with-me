@@ -23,19 +23,19 @@ public class CategoriesService {
         try {
             return categoryRepository.save(category);
         } catch (DataIntegrityViolationException e) {
-            throw new ConflictException("The integrity constraint has been violated.", e.getMessage());
+            throw new ConflictException("Категория уже существует", e.getMessage());
         }
     }
 
     @Transactional
     public Category change(Category oldCategory, Long catId) {
         Category newCategory = categoryRepository.findById(catId)
-                .orElseThrow(() -> new NotFoundException(String.format("Category with id=%d not found.", catId)));
+                .orElseThrow(() -> new NotFoundException(String.format("Категория с id=%d не найдена", catId)));
         newCategory.setName(oldCategory.getName());
         try {
             return categoryRepository.save(newCategory);
         } catch (DataAccessException e) {
-            throw new ConflictException(e.getMessage(), "The integrity constraint has been violated.");
+            throw new ConflictException(e.getMessage(), "Категория уже существует");
         }
     }
 
@@ -44,15 +44,14 @@ public class CategoriesService {
         try {
             categoryRepository.deleteById(catId);
         } catch (EmptyResultDataAccessException e) {
-            throw new NotFoundException(String.format("Category with id=%d not found.", catId));
+            throw new NotFoundException(String.format("Категория с id=%d не найдена", catId));
         } catch (DataIntegrityViolationException e) {
-            throw new ConflictException("The category is not empty.",
-                    "The conditions are not met for the requested operation.");
+            throw new ConflictException("С данной категорией сузествуют мероприятия");
         }
     }
     public Category findCategoryById(long categoryId) {
         Category category = categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new NotFoundException(String.format("Category with id=%d not found.", categoryId)));
+                .orElseThrow(() -> new NotFoundException(String.format("Категория с id=%d не найдена", categoryId)));
         return category;
     }
 
