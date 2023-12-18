@@ -7,6 +7,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.practicum.mainservice.api.admin.repositories.CategoryRepository;
+import ru.practicum.mainservice.exceptions.ConflictException;
+import ru.practicum.mainservice.exceptions.NotFoundException;
 import ru.practicum.mainservice.models.category.Category;
 
 import javax.transaction.Transactional;
@@ -46,7 +48,7 @@ public class CategoriesService {
         } catch (EmptyResultDataAccessException e) {
             throw new NotFoundException(String.format("Категория с id=%d не найдена", catId));
         } catch (DataIntegrityViolationException e) {
-            throw new ConflictException("С данной категорией сузествуют мероприятия");
+            throw new ConflictException("Невозможно удалить категорию", "С категорией связаны события");
         }
     }
     public Category findCategoryById(long categoryId) {
