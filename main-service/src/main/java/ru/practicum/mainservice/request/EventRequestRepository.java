@@ -19,7 +19,6 @@ public interface EventRequestRepository extends JpaRepository<EventRequest, Long
     List<EventRequest> findAllByEventIdAndStatusNot(long eventId, RequestStatus status);
 
     @Query("update EventRequest as er set er.status=?2 where er.event.id=?1")
-
     void updateAllByEventIdAndStatus(long eventId, RequestStatus status);
 
 }

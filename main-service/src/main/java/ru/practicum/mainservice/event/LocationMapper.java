@@ -12,5 +12,4 @@ public class LocationMapper {
                 .lat(lat)
                 .build();
     }
-
 }

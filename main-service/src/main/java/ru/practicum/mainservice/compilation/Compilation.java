@@ -19,7 +19,8 @@ import java.util.Set;
 public class Compilation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;String title;
+    Long id;
+    String title;
     Boolean pinned;
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {

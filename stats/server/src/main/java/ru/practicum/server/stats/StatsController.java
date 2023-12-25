@@ -48,4 +48,5 @@ public class StatsController {
     private LocalDateTime decodedDateTime(String datetime) {
         return LocalDateTime.parse(URLDecoder.decode(datetime, StandardCharsets.UTF_8), DATE_TIME_FORMATTER);
     }
+
 }

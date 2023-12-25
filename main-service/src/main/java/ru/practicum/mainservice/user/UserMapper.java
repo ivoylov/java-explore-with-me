@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class UserMapper {
+
     public static User newUserRequestToUser(NewUserRequest newUserRequest) {
         return User.builder()
                 .email(newUserRequest.getEmail())

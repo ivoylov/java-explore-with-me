@@ -52,7 +52,6 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public LocationDto adminUpdateLocation(long locationId, UpdateLocationRequest locationRequest) {
-
         LocationEntity location = getLocation(locationId);
 
         if (locationRequest.getRadius() != null) {
@@ -79,7 +78,6 @@ public class LocationServiceImpl implements LocationService {
 
         LocationEntity updated = locationRepository.save(location);
         return LocationEntityMapper.locationToLocationDto(updated);
-
     }
 
     @Override

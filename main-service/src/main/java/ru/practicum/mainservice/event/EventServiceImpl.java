@@ -41,7 +41,6 @@ import static ru.practicum.mainservice.utils.Util.getPageRequest;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class EventServiceImpl implements EventService {
-
     final StatsService statsService;
     final EventRepository eventRepository;
     final CategoryRepository categoryRepository;
@@ -93,12 +92,9 @@ public class EventServiceImpl implements EventService {
         }
     }
 
-
     @Override
     public EventFullDto initiatorGetEvent(long userId, long eventId) {
-
         Event event = getEvent(eventId, userId);
-
         return getEventFullDto(event, event.getUser());
     }
 
@@ -181,7 +177,6 @@ public class EventServiceImpl implements EventService {
     public List<ParticipationRequestDto> initiatorGetEventRequests(long userId, long eventId) {
         Event event = getEvent(eventId, userId);
         List<EventRequest> requests = requestRepository.findAllByEventId(event.getId());
-
         return EventRequestMapper.eventRequestToParticipationRequestDto(requests);
     }
 
@@ -245,7 +240,6 @@ public class EventServiceImpl implements EventService {
 
     private void confirmEventRequest(long eventId, Event event, List<EventRequest> allById) {
         long confirmedCount = event.getConfirmedRequests();
-
         if (event.getParticipantLimit() <= confirmedCount) {
             throw new ConflictException("The participant limit has been reached",
                     "For the requested operation the conditions are not met.");
@@ -303,6 +297,7 @@ public class EventServiceImpl implements EventService {
     public EventFullDto adminUpdateEvent(long eventId, UpdateEventAdminRequest updateEvent) {
 
         Event event = getEvent(eventId);
+
         User initiator = event.getUser();
 
         if (updateEvent.getStateAction() == EventStateAction.PUBLISH_EVENT &&
@@ -412,9 +407,7 @@ public class EventServiceImpl implements EventService {
         if (param.getSort() == EventSort.VIEWS) {
             Collections.sort(list, Comparator.comparing(EventShortDto::getViews));
         }
-
         return list;
-
     }
 
     private List<ViewStatsDto> getStats(List<Event> events, LocalDateTime rangeStart, LocalDateTime rangeEnd) {
@@ -435,7 +428,6 @@ public class EventServiceImpl implements EventService {
                 .collect(Collectors.toList());
 
         return statsService.getStatsSearch(start, end, false, uris);
-
     }
 
     @Override
@@ -445,7 +437,6 @@ public class EventServiceImpl implements EventService {
                         eventId)));
 
         return getEventFullDto(event, event.getUser(), true);
-
     }
 
     private EventFullDto getEventFullDto(Event event, User initiator) {

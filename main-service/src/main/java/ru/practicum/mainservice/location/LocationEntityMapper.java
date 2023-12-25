@@ -51,6 +51,7 @@ public class LocationEntityMapper {
         return locationDto;
     }
 
+
     public static List<LocationDto> locationToLocationDto(List<LocationEntity> locations) {
         return locations.stream()
                 .map(LocationEntityMapper::locationToLocationDto)

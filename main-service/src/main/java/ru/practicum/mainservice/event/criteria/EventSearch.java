@@ -1,7 +1,5 @@
 package ru.practicum.mainservice.event.criteria;
 
-import lombok.AccessLevel;
-import lombok.experimental.FieldDefaults;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import ru.practicum.mainservice.event.Event;

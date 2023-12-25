@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CategoryMapper {
+
     public static Category newCategoryDtoToCategory(NewCategoryDto newCategoryDto) {
         return Category.builder()
                 .name(newCategoryDto.getName())
@@ -28,4 +29,5 @@ public class CategoryMapper {
                 .map(CategoryMapper::categoryToCategoryDto)
                 .collect(Collectors.toList());
     }
+
 }

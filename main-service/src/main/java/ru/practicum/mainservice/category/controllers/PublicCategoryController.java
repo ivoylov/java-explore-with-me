@@ -34,4 +34,5 @@ public class PublicCategoryController {
         log.info("GET /categories/{} - Getting information about a category by its ID.", catId);
         return categoryService.findCategoryById(catId);
     }
+
 }

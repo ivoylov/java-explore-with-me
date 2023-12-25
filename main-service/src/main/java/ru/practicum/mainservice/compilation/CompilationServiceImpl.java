@@ -28,7 +28,6 @@ import static ru.practicum.mainservice.utils.Util.getPageRequest;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CompilationServiceImpl implements CompilationService {
-
     final StatsService statsService;
     final EventRepository eventRepository;
     final CompilationRepository compilationRepository;
@@ -111,12 +110,10 @@ public class CompilationServiceImpl implements CompilationService {
 
         for (Compilation compilation : compilations) {
             if (compilation.getEvents() != null && !compilation.getEvents().isEmpty()) {
-                // если есть события
                 List<EventShortDto> shortDtos = EventMapper.eventToEventShortDto(
                         new ArrayList<>(compilation.getEvents()), stats);
                 list.add(CompilationMapper.compilationToCompilationDto(compilation, shortDtos));
             } else {
-                // если нет событий
                 list.add(CompilationMapper.compilationToCompilationDto(compilation, new ArrayList<>()));
             }
         }
