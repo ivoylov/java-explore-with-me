@@ -1,10 +1,8 @@
 package ru.practicum.mainservice.event.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 import org.springframework.format.annotation.DateTimeFormat;
 import ru.practicum.mainservice.category.dto.CategoryDto;
 import ru.practicum.mainservice.user.dto.UserShortDto;
@@ -17,23 +15,22 @@ import java.time.LocalDateTime;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class EventShortDto {
-
-    private Long id;
+    Long id;
     @NotEmpty
-    private String annotation;
-    private Long confirmedRequests;
+    String annotation;
+    Long confirmedRequests;
     @NotEmpty
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime eventDate;
-    private Boolean paid;
+    LocalDateTime eventDate;
+    Boolean paid;
     @NotEmpty
-    private String title;
-    private Long views;
+    String title;
+    Long views;
     @NotNull
-    private CategoryDto category;
+    CategoryDto category;
     @NotNull
-    private UserShortDto initiator;
-
+    UserShortDto initiator;
 }

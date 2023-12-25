@@ -1,6 +1,8 @@
 package ru.practicum.mainservice.compilation;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,11 +26,12 @@ import static ru.practicum.mainservice.utils.Util.getPageRequest;
 
 @Service
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class CompilationServiceImpl implements CompilationService {
 
-    private final StatsService statsService;
-    private final EventRepository eventRepository;
-    private final CompilationRepository compilationRepository;
+    final StatsService statsService;
+    final EventRepository eventRepository;
+    final CompilationRepository compilationRepository;
 
     @Override
     @Transactional

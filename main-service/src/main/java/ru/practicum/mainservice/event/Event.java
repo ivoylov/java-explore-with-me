@@ -1,6 +1,7 @@
 package ru.practicum.mainservice.event;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 import ru.practicum.mainservice.category.Category;
 import ru.practicum.mainservice.compilation.Compilation;
 import ru.practicum.mainservice.user.User;
@@ -17,43 +18,44 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name = "events")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String title;
-    private String annotation;
-    private String description;
+    Long id;
+    String title;
+    String annotation;
+    String description;
     @Column(name = "created_on")
-    private LocalDateTime createdOn;
+    LocalDateTime createdOn;
     @Column(name = "event_date")
-    private LocalDateTime eventDate;
+    LocalDateTime eventDate;
     @Column(name = "published_on")
-    private LocalDateTime publishedOn;
-    private Boolean paid;
+    LocalDateTime publishedOn;
+    Boolean paid;
     @Column(name = "participant_limit")
-    private Integer participantLimit;
+    Integer participantLimit;
     @Column(name = "confirmed_requests")
-    private Long confirmedRequests;
+    Long confirmedRequests;
     @Column(name = "request_moderation")
-    private Boolean requestModeration;
+    Boolean requestModeration;
     @Enumerated(EnumType.STRING)
-    private EventState state;
+    EventState state;
     @Column(name = "location_lat")
-    private Double lat;
+    Double lat;
     @Column(name = "location_lon")
-    private Double lon;
+    Double lon;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
-    private Category category;
+    Category category;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    User user;
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
                     CascadeType.PERSIST,
                     CascadeType.MERGE
             },
             mappedBy = "events")
-    private Set<Compilation> compilations = new HashSet<>();
+    Set<Compilation> compilations = new HashSet<>();
 }

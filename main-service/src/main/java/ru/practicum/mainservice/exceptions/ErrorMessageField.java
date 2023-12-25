@@ -1,13 +1,15 @@
 package ru.practicum.mainservice.exceptions;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.experimental.FieldDefaults;
 
 @Getter
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class ErrorMessageField {
 
-    private final String field;
-
-    private final String message;
+    final String field;
+    final String message;
 
     public ErrorMessageField(String field, String message) {
         this.field = field;

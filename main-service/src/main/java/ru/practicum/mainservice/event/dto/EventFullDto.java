@@ -1,10 +1,8 @@
 package ru.practicum.mainservice.event.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 import org.springframework.format.annotation.DateTimeFormat;
 import ru.practicum.mainservice.category.dto.CategoryDto;
 import ru.practicum.mainservice.event.EventState;
@@ -17,28 +15,29 @@ import java.time.LocalDateTime;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class EventFullDto {
-    private Long id;
+    Long id;
     @NotNull
-    private String annotation;
-    private CategoryDto category;
-    private Long confirmedRequests;
+    String annotation;
+    CategoryDto category;
+    Long confirmedRequests;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime createdOn;
-    private String description;
+    LocalDateTime createdOn;
+    String description;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime eventDate;
-    private UserShortDto initiator;
-    private Location location;
-    private boolean paid;
-    private Integer participantLimit;
+    LocalDateTime eventDate;
+    UserShortDto initiator;
+    Location location;
+    boolean paid;
+    Integer participantLimit;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime publishedOn;
-    public boolean requestModeration;
-    private EventState state;
-    private String title;
-    private Long views;
+    LocalDateTime publishedOn;
+    boolean requestModeration;
+    EventState state;
+    String title;
+    Long views;
 }

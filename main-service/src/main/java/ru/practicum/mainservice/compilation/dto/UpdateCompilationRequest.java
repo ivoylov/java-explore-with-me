@@ -1,28 +1,21 @@
 package ru.practicum.mainservice.compilation.dto;
 
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.FieldDefaults;
 
 import javax.validation.constraints.Size;
 import java.util.Set;
 
-/**
- * Изменение информации о подборке событий.
- * Если поле в запросе не указано (равно null) - значит изменение этих данных не требуется.
- */
 @Builder
 @Getter
 @Setter
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class UpdateCompilationRequest {
-
-    // Список id событий подборки для полной замены текущего списка
-    private Set<Long> events;
-
-    // Закреплена ли подборка на главной странице сайта
-    private boolean pinned;
-
-    // Заголовок подборки
+    Set<Long> events;
+    boolean pinned;
     @Size(min = 1, max = 50)
-    private String title;
+    String title;
 }

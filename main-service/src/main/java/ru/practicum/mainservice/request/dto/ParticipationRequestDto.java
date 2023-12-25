@@ -1,9 +1,7 @@
 package ru.practicum.mainservice.request.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 import ru.practicum.mainservice.request.RequestStatus;
 
 import java.time.LocalDateTime;
@@ -12,10 +10,11 @@ import java.time.LocalDateTime;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class ParticipationRequestDto {
-    private LocalDateTime created;
-    private Long event;
-    private Long id;
-    private Long requester;
-    private RequestStatus status;
+    LocalDateTime created;
+    Long event;
+    Long id;
+    Long requester;
+    RequestStatus status;
 }

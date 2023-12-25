@@ -1,6 +1,7 @@
 package ru.practicum.mainservice.compilation;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 import ru.practicum.mainservice.event.Event;
 
 import javax.persistence.*;
@@ -14,15 +15,12 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "compilations")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Compilation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String title;
-
-    private Boolean pinned;
-
+    Long id;String title;
+    Boolean pinned;
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
                     CascadeType.PERSIST,
@@ -31,6 +29,5 @@ public class Compilation {
     @JoinTable(name = "compilation_events",
             joinColumns = { @JoinColumn(name = "compilation_id") },
             inverseJoinColumns = { @JoinColumn(name = "event_id") })
-    private Set<Event> events = new HashSet<>();
-
+    Set<Event> events = new HashSet<>();
 }

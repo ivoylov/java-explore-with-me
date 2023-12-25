@@ -1,6 +1,8 @@
 package ru.practicum.mainservice.request;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import ru.practicum.mainservice.event.Event;
@@ -18,11 +20,12 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class EventRequestServiceImpl implements EventRequestService {
 
-    private final EventRequestRepository requestRepository;
-    private final UserRepository userRepository;
-    private final EventRepository eventRepository;
+    final EventRequestRepository requestRepository;
+    final UserRepository userRepository;
+    final EventRepository eventRepository;
 
     @Override
     public List<ParticipationRequestDto> participantGetRequests(long userId) {

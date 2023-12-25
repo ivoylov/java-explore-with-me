@@ -2,7 +2,9 @@ package ru.practicum.mainservice.services;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Component;
 import ru.practicum.client.StatsClient;
 import ru.practicum.common.EndpointHitDto;
@@ -13,10 +15,11 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class StatsService {
 
-    private static final long INTERVAL_HOUR = 1;
-    private final StatsClient client;
+    static final long INTERVAL_HOUR = 1;
+    final StatsClient client;
 
     public void hit(EndpointHitDto endpointHitDto) {
         client.hit(endpointHitDto);

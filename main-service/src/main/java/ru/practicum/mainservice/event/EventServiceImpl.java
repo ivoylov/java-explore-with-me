@@ -1,6 +1,8 @@
 package ru.practicum.mainservice.event;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -37,14 +39,14 @@ import static ru.practicum.mainservice.utils.Util.getPageRequest;
 
 @Service
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class EventServiceImpl implements EventService {
 
-    private final StatsService statsService;
-
-    private final EventRepository eventRepository;
-    private final CategoryRepository categoryRepository;
-    private final UserRepository userRepository;
-    private final EventRequestRepository requestRepository;
+    final StatsService statsService;
+    final EventRepository eventRepository;
+    final CategoryRepository categoryRepository;
+    final UserRepository userRepository;
+    final EventRequestRepository requestRepository;
 
     @Override
     public List<EventShortDto> initiatorGetEvents(long userId, int from, int size) {
