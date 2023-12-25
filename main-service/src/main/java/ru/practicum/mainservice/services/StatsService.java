@@ -17,6 +17,7 @@ public class StatsService {
 
     private static final long INTERVAL_HOUR = 1;
     private final StatsClient client;
+    
     public void hit(EndpointHitDto endpointHitDto) {
         client.hit(endpointHitDto);
     }
