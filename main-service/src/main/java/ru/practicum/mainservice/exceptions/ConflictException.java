@@ -1,7 +1,6 @@
 package ru.practicum.mainservice.exceptions;
 
 public class ConflictException extends RuntimeException {
-
     private final String reason;
 
     public ConflictException(String message, String reason) {
@@ -12,4 +11,5 @@ public class ConflictException extends RuntimeException {
     public String getReason() {
         return reason;
     }
+
 }

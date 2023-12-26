@@ -7,7 +7,6 @@ import ru.practicum.client.StatsClient;
 
 @Configuration
 public class Config {
-
     @Bean
     public StatsClient statsClient() {
         return new StatsClient(new RestTemplate());

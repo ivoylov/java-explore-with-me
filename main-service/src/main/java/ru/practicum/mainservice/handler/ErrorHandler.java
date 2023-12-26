@@ -80,4 +80,5 @@ public class ErrorHandler {
         return new ApiErrorExtended(HttpStatus.INTERNAL_SERVER_ERROR.name(), "An unexpected error has occurred.",
                 e.getMessage(), Collections.singletonList(stackTrace));
     }
+
 }

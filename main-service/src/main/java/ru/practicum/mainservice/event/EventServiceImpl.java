@@ -41,7 +41,6 @@ import static ru.practicum.mainservice.utils.Util.getPageRequest;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class EventServiceImpl implements EventService {
-
     final StatsService statsService;
     final EventRepository eventRepository;
     final CategoryRepository categoryRepository;
@@ -93,12 +92,9 @@ public class EventServiceImpl implements EventService {
         }
     }
 
-
     @Override
     public EventFullDto initiatorGetEvent(long userId, long eventId) {
-
         Event event = getEvent(eventId, userId);
-
         return getEventFullDto(event, event.getUser());
     }
 
@@ -108,6 +104,7 @@ public class EventServiceImpl implements EventService {
 
         Event event = getEvent(eventId, userId);
 
+        // если событие уже опубликовано, то изменять его нельзя
         if (event.getState().equals(EventState.PUBLISHED)) {
             throw new ConflictException("Only pending or canceled events can be changed",
                     "For the requested operation the conditions are not met.");
@@ -181,7 +178,6 @@ public class EventServiceImpl implements EventService {
     public List<ParticipationRequestDto> initiatorGetEventRequests(long userId, long eventId) {
         Event event = getEvent(eventId, userId);
         List<EventRequest> requests = requestRepository.findAllByEventId(event.getId());
-
         return EventRequestMapper.eventRequestToParticipationRequestDto(requests);
     }
 
@@ -195,6 +191,7 @@ public class EventServiceImpl implements EventService {
             throw new BadRequestException("The status can only be CONFIRMED, REJECTED");
         }
 
+        // если событие не требует премодерации или лимит на кол-во участников равен 0, то подтверждение заявки не надо
         if ((!event.getRequestModeration() || event.getParticipantLimit() == 0) &&
                 updateRequest.getStatus() == RequestStatus.CONFIRMED) {
             throw new BadRequestException("The event does not need confirmation of requests");
@@ -246,6 +243,8 @@ public class EventServiceImpl implements EventService {
     private void confirmEventRequest(long eventId, Event event, List<EventRequest> allById) {
         long confirmedCount = event.getConfirmedRequests();
 
+        // если кол-во подтверждённых заявок на участие в событии подошло к ограничению на кол-во участников,
+        // то новая заявка не может быть подтверждена
         if (event.getParticipantLimit() <= confirmedCount) {
             throw new ConflictException("The participant limit has been reached",
                     "For the requested operation the conditions are not met.");
@@ -272,9 +271,11 @@ public class EventServiceImpl implements EventService {
         eventRepository.save(event);
         requestRepository.saveAll(allById);
 
+        // при достижении лимита на кол-во участников события, заявки, находящиеся в ожидании, отменяются
         if (isMoreLimit) {
             requestRepository.updateAllByEventIdAndStatus(eventId, RequestStatus.PENDING);
         }
+
     }
 
     @Override
@@ -303,14 +304,17 @@ public class EventServiceImpl implements EventService {
     public EventFullDto adminUpdateEvent(long eventId, UpdateEventAdminRequest updateEvent) {
 
         Event event = getEvent(eventId);
+
         User initiator = event.getUser();
 
+        // событие готово к публикации, только если оно в ожидании
         if (updateEvent.getStateAction() == EventStateAction.PUBLISH_EVENT &&
                 event.getState() != EventState.PENDING) {
             throw new ConflictException("An event can be published only if it is in the publication " +
                     "waiting state.", "The event does not meet the editing rules.");
         }
 
+        // можно отклонить только ещё не опубликованное событие
         if (updateEvent.getStateAction() == EventStateAction.REJECT_EVENT &&
                 event.getState() == EventState.PUBLISHED) {
             throw new ConflictException("An event can be rejected only if it has not been published yet",
@@ -412,9 +416,7 @@ public class EventServiceImpl implements EventService {
         if (param.getSort() == EventSort.VIEWS) {
             Collections.sort(list, Comparator.comparing(EventShortDto::getViews));
         }
-
         return list;
-
     }
 
     private List<ViewStatsDto> getStats(List<Event> events, LocalDateTime rangeStart, LocalDateTime rangeEnd) {
@@ -435,7 +437,6 @@ public class EventServiceImpl implements EventService {
                 .collect(Collectors.toList());
 
         return statsService.getStatsSearch(start, end, false, uris);
-
     }
 
     @Override
@@ -445,7 +446,6 @@ public class EventServiceImpl implements EventService {
                         eventId)));
 
         return getEventFullDto(event, event.getUser(), true);
-
     }
 
     private EventFullDto getEventFullDto(Event event, User initiator) {
@@ -490,6 +490,8 @@ public class EventServiceImpl implements EventService {
                         categoryId)));
     }
 
+    // Можно подавать заявку только на событие, которое начнётся не раньше, чем через 2 часа
+    // Надо проверить время
     private void checkNewEventDate(LocalDateTime newEventDate, long afterHour) {
         if (!newEventDate.isAfter(LocalDateTime.now().plusHours(afterHour))) {
             throw new BadRequestException("Field: eventDate. Error: The date of the event cannot " +

@@ -20,7 +20,6 @@ import java.util.List;
 @RestControllerAdvice
 public class ErrorHandler {
 
-    // 400
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiError handlerBadRequestException(final BadRequestException e) {
@@ -29,7 +28,6 @@ public class ErrorHandler {
                 e.getMessage());
     }
 
-    // 400 MissingServletRequestParameterException
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiError handlerMissingServletRequestParameterException(final MissingServletRequestParameterException e) {
@@ -38,7 +36,6 @@ public class ErrorHandler {
                 e.getMessage());
     }
 
-    // 400 MethodArgumentTypeMismatch
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiError handlerMethodArgumentTypeMismatch(final MethodArgumentTypeMismatchException e) {
@@ -46,7 +43,6 @@ public class ErrorHandler {
         return new ApiError(HttpStatus.BAD_REQUEST.name(), "An incorrectly made request.",
                 e.getMessage());
     }
-
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -60,7 +56,6 @@ public class ErrorHandler {
                 "Invalid data.", errors);
     }
 
-    // 404
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ApiError handleNotFoundException(final NotFoundException e) {
@@ -68,7 +63,6 @@ public class ErrorHandler {
         return new ApiError(HttpStatus.NOT_FOUND.name(), "The required object was not found.", e.getMessage());
     }
 
-    // 409
     @ExceptionHandler
     @ResponseStatus(HttpStatus.CONFLICT)
     public ApiError handleConflictException(ConflictException e) {
@@ -76,7 +70,6 @@ public class ErrorHandler {
         return new ApiError(HttpStatus.CONFLICT.name(), e.getReason(), e.getMessage());
     }
 
-    // 500
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ApiErrorExtended handlerException(final Exception e) {
@@ -87,4 +80,5 @@ public class ErrorHandler {
         return new ApiErrorExtended(HttpStatus.INTERNAL_SERVER_ERROR.name(), "An unexpected error has occurred.",
                 e.getMessage(), Collections.singletonList(stackTrace));
     }
+
 }

@@ -49,4 +49,5 @@ public class UserServiceImpl implements UserService {
             throw new NotFoundException(String.format("User with id=%d not found.", userId));
         }
     }
+
 }

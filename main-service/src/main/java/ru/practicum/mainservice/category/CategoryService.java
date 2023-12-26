@@ -6,6 +6,7 @@ import ru.practicum.mainservice.category.dto.NewCategoryDto;
 import java.util.List;
 
 public interface CategoryService {
+
     CategoryDto findCategoryById(long categoryId);
 
     List<CategoryDto> findAllCategories(int form, int size);
@@ -15,4 +16,5 @@ public interface CategoryService {
     CategoryDto updateCategory(long categoryId,CategoryDto categoryDto);
 
     void deleteCategory(long categoryId);
+
 }

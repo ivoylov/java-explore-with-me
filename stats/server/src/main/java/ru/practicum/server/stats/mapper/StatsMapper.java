@@ -10,9 +10,11 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface StatsMapper {
+
     Stats endpointHitDtoToStats(EndpointHitDto hitDto);
 
     EndpointHitDto statsToEndpointHitDto(Stats stats);
 
     List<ViewStatsDto> viewStatsToViewStatsDto(List<ViewStats> viewStats);
+
 }

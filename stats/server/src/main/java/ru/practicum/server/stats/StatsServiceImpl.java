@@ -1,6 +1,8 @@
 package ru.practicum.server.stats;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.common.EndpointHitDto;
@@ -13,10 +15,11 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class StatsServiceImpl implements StatsService {
 
-    private final StatsRepository statsRepository;
-    private final StatsMapper statsMapper;
+    final StatsRepository statsRepository;
+    final StatsMapper statsMapper;
 
     @Override
     @Transactional
@@ -45,6 +48,6 @@ public class StatsServiceImpl implements StatsService {
                         .findResInUri(start, end, uris));
             }
         }
-
     }
+
 }

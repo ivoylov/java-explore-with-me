@@ -44,4 +44,5 @@ public class AdminCategoryController {
         log.info("DELETE /admin/categories/{} - Deleting a category.", catId);
         categoryService.deleteCategory(catId);
     }
+
 }

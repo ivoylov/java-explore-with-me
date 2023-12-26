@@ -13,14 +13,12 @@ import java.time.LocalDateTime;
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ApiError {
-
     final String status;
     final String reason;
     final String message;
-
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private final LocalDateTime timestamp = LocalDateTime.now();
+    final LocalDateTime timestamp = LocalDateTime.now();
 
     public ApiError(String status, String reason, String message) {
         this.status = status;

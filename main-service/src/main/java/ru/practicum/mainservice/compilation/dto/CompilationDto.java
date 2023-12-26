@@ -8,9 +8,6 @@ import ru.practicum.mainservice.event.dto.EventShortDto;
 
 import java.util.List;
 
-/**
- * Подборка событий
- */
 @Builder
 @Getter
 @FieldDefaults(level = AccessLevel.PRIVATE)

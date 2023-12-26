@@ -50,4 +50,5 @@ public class StatsClient {
 
         return rest.exchange(url, HttpMethod.GET, null, Object.class, parameters);
     }
+
 }

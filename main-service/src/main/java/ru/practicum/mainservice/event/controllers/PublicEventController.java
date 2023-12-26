@@ -1,6 +1,8 @@
 package ru.practicum.mainservice.event.controllers;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.common.EndpointHitDto;
@@ -26,10 +28,11 @@ import static ru.practicum.mainservice.utils.Util.DATE_TIME_FORMATTER;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/events")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class PublicEventController {
 
-    private final EventService eventService;
-    private final StatsService statsService;
+    final EventService eventService;
+    final StatsService statsService;
 
     @GetMapping
     public List<EventShortDto> publicFindEvents(
@@ -44,7 +47,6 @@ public class PublicEventController {
             @RequestParam(defaultValue = "10") @Positive int size,
             HttpServletRequest request
     ) {
-        System.out.println(request.getRequestURI());
         LocalDateTime start = decodedDateTime(rangeStart);
         LocalDateTime end = decodedDateTime(rangeEnd);
 

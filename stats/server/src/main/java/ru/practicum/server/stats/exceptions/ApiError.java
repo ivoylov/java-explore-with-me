@@ -1,29 +1,22 @@
 package ru.practicum.server.stats.exceptions;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.FieldDefaults;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
-/**
- * Сведения об ошибке
- */
 @Getter
 @Setter
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class ApiError {
+    final String status;
+    final String reason;
+    final String message;
 
-    // Код статуса HTTP-ответа
-    private final String status;
-
-    // Общее описание причины ошибки
-    private final String reason;
-
-    // Сообщение об ошибке e.getMessage()
-    private final String message;
-
-    // Дата и время когда произошла ошибка (в формате "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private final LocalDateTime timestamp = LocalDateTime.now();
@@ -33,4 +26,5 @@ public class ApiError {
         this.reason = reason;
         this.message = message;
     }
+
 }

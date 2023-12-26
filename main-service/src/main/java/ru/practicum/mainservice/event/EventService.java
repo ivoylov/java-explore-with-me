@@ -8,6 +8,7 @@ import ru.practicum.mainservice.request.dto.ParticipationRequestDto;
 import java.util.List;
 
 public interface EventService {
+
     List<EventShortDto> initiatorGetEvents(long userId, int from, int size);
 
     EventFullDto initiatorAddEvent(long userId, NewEventDto newEventDto);
@@ -29,4 +30,5 @@ public interface EventService {
     List<EventShortDto> publicFindEvents(FindEventPublicParam param);
 
     EventFullDto publicGetEvent(long eventId);
+
 }
